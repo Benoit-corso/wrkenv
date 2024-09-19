@@ -1,3 +1,4 @@
+" ref: https://sauravomar01.medium.com/configure-custom-header-template-in-vim-editor-6d578e440da3
 let s:asciiart = [
 			\"      :::       ::::::::  ",
 			\"     :+: ::    :+:  :+:   ",
