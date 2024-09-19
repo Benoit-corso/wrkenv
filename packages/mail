@@ -1,0 +1,10 @@
+#! /usr/bin/bash
+
+declare -A packages=(
+	["ssmtp"]="ssmtp" # Send local mail to smtp server
+	["mailutils"]="mailutils" # Send local mail to smtp server
+)
+
+cat<<EOF >> "/etc/ssmtp/ssmtp.conf"
+
+EOF
