@@ -1,12 +1,17 @@
 " ref: https://sauravomar01.medium.com/configure-custom-header-template-in-vim-editor-6d578e440da3
 let s:asciiart = [
-			\"      :::       ::::::::  ",
-			\"     :+: ::    :+:  :+:   ",
-			\"    +:+  :+:  +:+  +:+    ",
-			\"   +#+    :+:+:+  +#+     ",
-			\"  +#+ ==== +#+#+#+#+      ",
-			\" #+#       #+#            ",
-			\"######@   ### lateforme.io"
+			\"............................... ",
+			\":=...........................=: ",
+			\":=:                         :=: ",
+			\":=:                         :=: ",
+			\":=:     laplateforme.io     :=: ",
+			\":='.........................'=: ",
+			\"'++++#=-*+*+*+*#*+*+*+*-=#++++' ",
+			\"     #=-               -=#      ",
+			\"┌.   #=-  ..       ..  -=#   .┐ ",
+			\"│×-. #=-.+*-..   ..-*+.-=# .-×│ ",
+			\" '+:-+=-:'¯¯*:-■-:*¯¯':-=+-:+'  ",
+			\"   ':..:'    ':.:'    ':..:'    ",
 			\]
 
 let s:start		= '/*'
@@ -39,10 +44,6 @@ let s:types		= {
 function! s:filetype()
 	let l:f = s:filename()
 
-	let s:start		= '#'
-	let s:end		= '#'
-	let s:fill		= '*'
-
 	for type in keys(s:types)
 		if l:f =~ type
 			let s:start		= s:types[type][0]
@@ -59,7 +60,7 @@ endfunction
 
 function! s:textline(left, right)
 	let l:left = strpart(a:left, 0, s:length - s:margin * 2 - strlen(a:right))
-	retunr s:start . repeat(' ', s:margin - strlen(s:start)) . l:left . repeat(' ', s:length - s:margin * 2 - strlen(l:left) - strlen(a:right)) . a:right . repeat(' ', s:margin - strlen(s:end)) . s:end
+	return s:start . repeat(' ', s:margin - strlen(s:start)) . l:left . repeat(' ', s:length - s:margin * 2 - strlen(l:left) - strlen(a:right)) . a:right . repeat(' ', s:margin - strlen(s:end)) . s:end
 endfunction
 
 function! s:line(n)
@@ -97,7 +98,7 @@ function! s:mail()
 	endif
 	let l:mail = $MAIL
 	if strlen(l:mail) == 0
-		let l:mail = "0xd34db33f@laplateforme.io"
+		let l:mail = l:user."@laplateforme.io"
 	endif
 	return l:mail
 endfunction
@@ -129,6 +130,7 @@ endfunction
 
 function! s:update()
 	call s:filetype()
+	set colorcolumn=s:length
 	if getline(9) =~ s:start . repeat(' ', s:margin - strlen(s:start)) . "Updated: "
 		if &mod
 			call setline(9, s:line(9))
